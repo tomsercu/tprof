@@ -34,6 +34,6 @@ function prof.dump()
 
    print('PROF')
    for _, v in ipairs(a) do
-      print(('%20s %7.1fs %d'):format(v.name, v.time, v.num_calls))
+      print(('%20s %10.3fs %d'):format(v.name, v.time, v.num_calls))
    end
 end
