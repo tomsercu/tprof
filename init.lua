@@ -15,12 +15,33 @@ function prof.toc(name)
    prof.start_time[name] = nil
    
    if prof.data[name] == nil then
-      prof.data[name] = {num_calls=0, time=0}
+      prof.data[name] = {}
    end
-   prof.data[name].time = prof.data[name].time + time
-   prof.data[name].num_calls = prof.data[name].num_calls + 1
-
+   table.insert(prof.data[name], time)
    return time
+end
+
+function sum(xs) 
+   local acc = 0
+   for k, v in ipairs(xs) do
+      acc = acc + v
+   end
+   return acc
+end
+
+function range(xs)
+   local min = xs[1]
+   local max = xs[1]
+   for k, v in ipairs(xs) do
+      if v < min then
+         min = v
+      end
+
+      if v > max then
+         max = v
+      end
+   end
+   return min, max
 end
 
 function prof.dump()
@@ -30,10 +51,12 @@ function prof.dump()
       table.insert(a, v)
    end
    
-   table.sort(a, function (a, b) return a.time > b.time end)
+   table.sort(a, function (a, b) return sum(a) > sum(b) end)
 
-   print('PROF')
+   print('      Time     Calls       Avg       Min       Max  Name')
    for _, v in ipairs(a) do
-      print(('%20s %10.3fs %d'):format(v.name, v.time, v.num_calls))
+      local time = sum(v)
+      local min, max = range(v)
+      print((' %9.4f %9d %9.4f %9.4f %9.4f  %s'):format(time, #v, time / #v, min, max, v.name))
    end
 end
