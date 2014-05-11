@@ -5,7 +5,7 @@
 #include "lualib.h"
 #include "lauxlib.h"
 
-static int time(lua_State *L)
+static int time_(lua_State *L)
 {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
@@ -14,7 +14,7 @@ static int time(lua_State *L)
 }
 
 static const struct luaL_Reg funcs[] = {
-	{"time", time},
+	{"time", time_},
 	{NULL, NULL}
 };
 
