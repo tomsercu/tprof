@@ -18,7 +18,7 @@ static const struct luaL_Reg funcs[] = {
 	{NULL, NULL}
 };
 
-int luaopen_libprof(lua_State *L) {
-	luaL_openlib(L, "prof", funcs, 0);
+int luaopen_libtprof(lua_State *L) {
+	luaL_openlib(L, "tprof", funcs, 0);
 	return 1;
 }

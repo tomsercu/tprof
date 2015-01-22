@@ -1,23 +1,23 @@
-require 'libprof'
+require 'libtprof'
 
-prof.data = {}
-prof.start_time = {}
+tprof.data = {}
+tprof.start_time = {}
 
-function prof.tic(name)
+function tprof.tic(name)
    name = name or '_nil'
-   assert(prof.start_time[name] == nil)
-   prof.start_time[name] = prof.time()
+   assert(tprof.start_time[name] == nil)
+   tprof.start_time[name] = tprof.time()
 end
 
-function prof.toc(name)
+function tprof.toc(name)
    name = name or '_nil'
-   local time = prof.time() - prof.start_time[name]
-   prof.start_time[name] = nil
+   local time = tprof.time() - tprof.start_time[name]
+   tprof.start_time[name] = nil
    
-   if prof.data[name] == nil then
-      prof.data[name] = {}
+   if tprof.data[name] == nil then
+      tprof.data[name] = {}
    end
-   table.insert(prof.data[name], time)
+   table.insert(tprof.data[name], time)
    return time
 end
 
@@ -44,9 +44,9 @@ function range(xs)
    return min, max
 end
 
-function prof.dump()
+function tprof.dump()
    local a = {}
-   for k, v in pairs(prof.data) do
+   for k, v in pairs(tprof.data) do
       v.name = k
       table.insert(a, v)
    end
