@@ -2,6 +2,14 @@
 
 Simple torch profiler. Forked from jure zbontar's prof-torch.
 
+Intstallation instructions:
+```bash
+cd tmp
+git clone https://github.com/tomsercu/tprof
+cd tprof
+luarocks build tprof-1.0-1.rockspec
+```
+
 Example:
 ```lua
 require 'tprof'
